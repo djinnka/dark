@@ -18,6 +18,11 @@
     - my_public_ip_cidr IP адрес с которого будет доступ к k8s через LB (можно параметрами деплоймента закрыть public)
     - ssk_key_pair_name имя ключа ssh по которому будет доступ на ресурсы
 Кластер разворачивается но не закончены настройки - скрипты для установки master\worker комронентов запускаются при указании ca,key,token kubeadm - не генерил по этому не закончил
+(bastion.txt - деплоймент ec2 bastion host )
+
+6. MetalLB - установка из https://artifacthub.io/packages/helm/bitnami/metallb (есть и другие варианты). В env/main.tf добавлено как дополнительный модуль
+
+
 
 # Postgresql
 Параметры в postgresql-terraform/variables.tf
