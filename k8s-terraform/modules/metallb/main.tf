@@ -3,7 +3,7 @@ resource "helm_release" "metallb" {
   namespace        = "metallb"
   create_namespace = true
 
-  repository       = "oci://registry-1.docker.io/bitnamicharts/metallb"
+  repository       = "github.com/metallb/metallb/config/frr?ref=v0.14.3"
   chart            = "metallb"
   version          = "4.15.0"
   #values           = [templatefile("${path.module}/values/values.yaml",

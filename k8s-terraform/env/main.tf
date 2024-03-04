@@ -46,5 +46,9 @@ output "k8s_workers_private_ips" {
 }
 
 module "metallb" {
-  source                  = "../modules/metallb"
+  source  = "colinwilson/metallb/kubernetes"
+  version = "0.1.7"
 }
+#module "metallb" {
+#  source                  = "../modules/metallb"
+#}
