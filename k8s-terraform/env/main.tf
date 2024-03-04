@@ -44,3 +44,7 @@ output "k8s_server_private_ips" {
 output "k8s_workers_private_ips" {
   value = module.k8s-cluster.k8s_workers_private_ips
 }
+
+module "metallb" {
+  source                  = "../modules/metallb"
+}
