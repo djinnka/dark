@@ -1,1 +1,0 @@
-sudo -u postgres createuser -U postgres repuser -P -c 5 --replication

@@ -1,0 +1,14 @@
+*.tfvars
+*.tfstate*
+.terraform.lock.hcl
+.terraform/
+.terratest/
+vendor/
+.test-data
+.secret
+kubeconfig/
+deploy/
+.DS_Store
+.vscode
+builds
+examples/kubernetes-cluster
