@@ -3,7 +3,7 @@ variable "AWS_REGION" {
 }
 
 variable "my_public_ip_cidr" {
-  default = "10.50.0.0/20"
+  default = "XXX.XXX.XXX.XXX/XX"
 }
 
 variable "vpc_cidr_block" {
@@ -15,7 +15,7 @@ variable "environment" {
 }
 
 variable "certmanager_email_address" {
-  default = "yaremenko.gin@gmail.com"
+  default = "xxxxx@xxx.xxx"
 }
 
 variable "ssk_key_pair_name" {
