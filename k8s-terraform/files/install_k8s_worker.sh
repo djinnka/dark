@@ -1,4 +1,5 @@
 #!/bin/bash
+
 wait_lb() {
 while [ true ]
 do
@@ -10,6 +11,7 @@ do
   echo "wait for LB"
 done
 }
+
 wait_for_ca_secret(){
   res=$(aws secretsmanager get-secret-value --secret-id ${kubeadm_ca_secret_name} | jq -r .SecretString)
   while [[ -z "$res" || "$res" == "${default_secret_placeholder}" ]]
@@ -18,6 +20,7 @@ wait_for_ca_secret(){
     res=$(aws secretsmanager get-secret-value --secret-id ${kubeadm_ca_secret_name} | jq -r .SecretString)
     sleep 1
   done
+
   res_token=$(aws secretsmanager get-secret-value --secret-id ${kubeadm_token_secret_name} | jq -r .SecretString)
   while [[ -z "$res_token" || "$res_token" == "${default_secret_placeholder}" ]]
   do
@@ -26,11 +29,14 @@ wait_for_ca_secret(){
     sleep 1
   done
 }
+
 render_kubejoin(){
+
 HOSTNAME=$(hostname)
 ADVERTISE_ADDR=$(ip -o route get to 8.8.8.8 | grep -Po '(?<=src )(\S+)')
 CA_HASH=$(aws secretsmanager get-secret-value --secret-id ${kubeadm_ca_secret_name} | jq -r .SecretString)
 KUBEADM_TOKEN=$(aws secretsmanager get-secret-value --secret-id ${kubeadm_token_secret_name} | jq -r .SecretString)
+
 cat <<-EOF > /root/kubeadm-join-worker.yaml
 ---
 apiVersion: kubeadm.k8s.io/v1beta3
@@ -55,10 +61,13 @@ apiVersion: kubelet.config.k8s.io/v1beta1
 cgroupDriver: systemd
 EOF
 }
+
 k8s_join(){
   kubeadm join --config /root/kubeadm-join-worker.yaml
 }
+
 wait_lb
+
 wait_for_ca_secret
 render_kubejoin
 k8s_join
